@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
+import { ProductDetail } from "../../components/ProductDetail"
 import { Layout } from "../../components/Layout"
 import { Card } from "../../components/Card/Card"
 import { API } from "../../auth/api/api"
@@ -6,30 +7,30 @@ export function Home() {
     const [items,setItems] = React.useState([])
 
     useEffect(() => {
-        fetch(API)
-            .then(response => response.json())
-            .then(data => setItems(data))
-
-
+        const fetchData = async () => {
+           try {
+            const res = await fetch(API)
+            const data = await res.json()
+            setItems(data)
+           }
+           catch (error) {
+            throw new Error(error)
+           }
+        } 
+        fetchData()
         },[])
-
-    const Props = {
-        id: items.id,
-        title: items.title,
-        image: items.image,
-        category: items.category,
-        price: items.price,
-    }    
-
 
     return (
         <Layout>
             Home
+            <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg ">
             {
                 items?.map((item) => (
                     <Card key={item.id} prop={item}/>
                 ))
             }
+            </section>
+            <ProductDetail />
         </Layout>
     )
 }
