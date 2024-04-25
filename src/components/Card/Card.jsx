@@ -1,12 +1,13 @@
 import { FaPlus } from "react-icons/fa6";
 import { useContext } from "react";
 import { ShoppingCardContext } from "../../Context/Context";
-import { AddAside } from "../addAside/AddAside";
 
 export function Card({prop}) {
     const {
         count,
-        setCount
+        setCount,
+        shoppingCard,
+        setShoppingCard
     } = useContext(ShoppingCardContext)
     const {
         category,
@@ -22,7 +23,7 @@ export function Card({prop}) {
                 <div className="w-6 h-6 absolute top-0 right-0 flex justify-center items-center bg-white rounded-full m-2 p-1">
                     <FaPlus onClick={() => {
                         setCount(count + 1)
-                        AddAside(prop)
+                        setShoppingCard([...shoppingCard, prop])
                     }}/>
                 </div>
             </figure>
