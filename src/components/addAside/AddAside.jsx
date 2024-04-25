@@ -21,20 +21,26 @@ export function AddAside() {
         return(map)
     }
     const callFunc = loadShoppingCard()
+    const removeCard = (element) => {
+        const index = shoppingCard.indexOf(element)
+        const newShoppingCard = shoppingCard.slice(index)
+        setShoppingCard(newShoppingCard)
+    }
     return (
-        <div style={{width:"360px", height:"80px"}} className='relative grid  auto-rows-max h-full gap-2 items-center p-2'>
+        <div style={{width:"360px", height:"auto"}} className='relative grid  auto-rows-max h-full gap-2 overflow-auto items-center p-2'>
             {
                 callFunc.map(element => (
                     <div key={element.key} className='relative h-24 w-full flex justify-between items-center'>
-                       <IoIosClose className='absolute top-0 right-2   font-semibold'/>
+                       <IoIosClose onClick={() => {
+                        removeCard(element)
+                       }} className='absolute top-0 right-2   font-semibold'/>
                         <img className='object-contain h-20  rounded-lg imag bg-cover w-16' src={element.image}/>
-                        <div className='flex flex-col max-w-32 text-nowrap  text-sm gap-2 mr-2'>
+                        <div className='flex flex-col max-w-32 relative text-nowrap  text-sm gap-2 mr-2'>
                             <p className='w-32 text-ellipsis overflow-hidden'>{element.title}</p>
-                            <p className='font-semibold text-left'>{element.price}</p>
+                            <p className='font-semibold text-right'>${element.price}</p>
                         </div>
                     </div>
                 )) 
             }
-        </div>
-    )
+        </div>)
 }

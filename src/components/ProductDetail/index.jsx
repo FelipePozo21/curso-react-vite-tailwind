@@ -11,7 +11,7 @@ export function ProductDetail() {
 
     return (
         isProductDetailOpen && (
-            <aside style={{width:'360px',height:"calc(100vh - 68px)", top:'68px'}} className="flex flex-col fixed bg-white right-0 border border-black rounded-lg">
+            <aside style={{width:'360px',height:"calc(100vh - 68px)", top:'68px'}} className="flex flex-col absolute overflow-hidden max-h-[900px] bg-white right-0 border border-black rounded-lg">
                 <div className=" flex justify-between items-center p-6">
                     <h2 className="font-medium items-center">Detail</h2>
                 <IoIosClose onClick={() => {
