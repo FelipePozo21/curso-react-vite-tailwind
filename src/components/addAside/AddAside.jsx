@@ -5,9 +5,7 @@ import { IoIosClose } from 'react-icons/io'
 export function AddAside() {
     const {
         shoppingCard,
-        setShoppingCard,
-        count,
-        setCount
+        removeCard
     } = useContext(ShoppingCardContext)
     const loadShoppingCard = () => {
         let map = shoppingCard.map(e => {
@@ -20,32 +18,24 @@ export function AddAside() {
         })
         return(map)
     }
+
     const callFunc = loadShoppingCard()
-    const removeCard = (key) => {
-        let newShop = []
-        for(let i = 0; i < shoppingCard.length; i++) {
-            if(key != shoppingCard[i].id) {
-                newShop.push(shoppingCard[i])
-            }
-        }
-        setCount(count - 1)
-        setShoppingCard(newShop)
-    }
     return (
-        <div style={{width:"360px", height:"auto"}} className='relative grid  auto-rows-max h-full gap-2 overflow-auto items-center p-2'>
-            {
-                callFunc.map(element => (
-                    <div key={element.key} className='relative h-24 w-full flex justify-between items-center'>
-                       <IoIosClose onClick={() => {
-                        removeCard(element.key)
-                       }} className='absolute top-0 right-2   font-semibold'/>
-                        <img className='object-contain h-20  rounded-lg imag bg-cover w-16' src={element.image}/>
-                        <div className='flex flex-col max-w-32 relative text-nowrap  text-sm gap-2 mr-2'>
-                            <p className='w-32 text-ellipsis overflow-hidden'>{element.title}</p>
-                            <p className='font-semibold text-right'>${element.price}</p>
+        <div  style={{width:"360px"}} className='relative grid  auto-rows-max h-auto gap-2 overflow-auto items-center p-2'>
+                {
+                    callFunc.map(element => (
+                        <div key={element.key} className='relative h-24 w-full flex justify-between items-center'>
+                        <IoIosClose onClick={() => {
+                            removeCard(element.key)
+                        }} className='absolute top-0 right-2   font-semibold'/>
+                            <img className='object-contain h-20  rounded-lg imag bg-cover w-16' src={element.image}/>
+                            <div className='flex flex-col max-w-32 relative text-nowrap  text-sm gap-2 mr-2'>
+                                <p className='w-32 text-ellipsis overflow-hidden'>{element.title}</p>
+                                <p className='font-semibold text-right'>${element.price}</p>
+                            </div>
                         </div>
-                    </div>
-                )) 
-            }
-        </div>)
+                    )) 
+                }
+            </div>    
+     )
 }

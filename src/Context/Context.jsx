@@ -10,6 +10,11 @@ export function ShoppingCard({children}) {
     const toggleIsProductDetailOpen = () => {
         setIsProductDetailOpen(!isProductDetailOpen)
     }
+    const removeCard = (key) => {
+        setCount(count - 1)
+        const filtered = shoppingCard.filter(product => product.id != key)
+        setShoppingCard(filtered)
+    }
 
     return (
         <ShoppingCardContext.Provider value={{
@@ -18,7 +23,8 @@ export function ShoppingCard({children}) {
             isProductDetailOpen,
             toggleIsProductDetailOpen,
             shoppingCard,
-            setShoppingCard
+            setShoppingCard,
+            removeCard
         }}>
             {children}
         </ShoppingCardContext.Provider>

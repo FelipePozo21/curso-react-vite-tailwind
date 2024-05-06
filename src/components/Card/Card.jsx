@@ -47,7 +47,7 @@ export function Card({prop}) {
                 {renderIcon(id)}
             </figure>
             <p className="flex justify-between">
-                <span className="text-sm font-light">{title}</span>
+                <span className="text-sm font-light h-10 text-ellipsis overflow-hidden">{title}</span>
                 <span className="text-lg font-medium">{price}</span>
             </p>
         </div>
